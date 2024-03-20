@@ -26,9 +26,9 @@ jobs:
         mend version
         
     - name: Resolve .NET dependencies
-      run: dotnet restore
+      run: nuget install
     - name: Resolve Maven dependencies
-      run: ./mvnw clean install
+      run: mvn clean install
     - name: Resolve npm dependencies
       run: npm install
     - name: Resolve pip dependencies
