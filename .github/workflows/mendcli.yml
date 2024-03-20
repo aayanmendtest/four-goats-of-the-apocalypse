@@ -36,7 +36,7 @@ jobs:
 
     - name: Run Mend CLI
       run: |
-        mend dep --update --scope "Aayans Sandbox//*//*" --non-interactive
+        mend dep --update --scope "Aayans Sandbox//SCA_CLI//four-goats-of-the-apocolypse" --non-interactive
       env:
         MEND_USER_KEY: ${{ secrets.WS_USERKEY }}
         MEND_EMAIL: ${{ secrets.MEND_EMAIL }}
