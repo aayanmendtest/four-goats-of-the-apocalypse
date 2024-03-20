@@ -14,19 +14,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    
     - name: Download Mend CLI
       run: |
         echo "Downlaoding the CLI"
         curl "https://downloads.mend.io/cli/linux_amd64/mend" -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+        
     - name: Print Mend CLI Version
       run: |
         echo "Verifying the CLI version"
         mend version
-    - name: Resolve dependencies
-      run: |
-        dotnet restore
+        
+    - name: Resolve .NET dependencies
+      run: dotnet restore
+    - name: Resolve Maven dependencies
+        ./mvnw clean install
+    - name: Resolve npm dependencies
         npm install
-        mvn install
+    - name: Resolve pip dependencies
         pip install -r requirements.txt
 
     - name: Run Mend CLI
