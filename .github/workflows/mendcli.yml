@@ -28,11 +28,11 @@ jobs:
     - name: Resolve .NET dependencies
       run: dotnet restore
     - name: Resolve Maven dependencies
-        ./mvnw clean install
+      run: ./mvnw clean install
     - name: Resolve npm dependencies
-        npm install
+      run: npm install
     - name: Resolve pip dependencies
-        pip install -r requirements.txt
+      run: pip install -r requirements.txt
 
     - name: Run Mend CLI
       run: |
