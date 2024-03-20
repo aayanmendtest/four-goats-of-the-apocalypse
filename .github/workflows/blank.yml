@@ -1,0 +1,39 @@
+name: CI
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs: 
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Download Mend CLI
+      run: |
+        echo "Downlaoding the CLI"
+        curl "https://downloads.mend.io/cli/linux_amd64/mend" -o /usr/local/bin/mend && chmod +x /usr/local/bin/mend
+    - name: Print Mend CLI Version
+      run: |
+        echo "Verifying the CLI version"
+        mend version
+    - name: Resolve dependencies
+      run: |
+        dotnet restore
+        npm install
+        mvn install
+        pip install -r requirements.txt
+
+    - name: Run Mend CLI
+      run: |
+        mend dep --update --scope "Aayans Sandbox//*//*" --non-interactive
+      env:
+        MEND_USER_KEY: ${{ secrets.WS_USERKEY }}
+        MEND_EMAIL: ${{ secrets.MEND_EMAIL }}
+        MEND_URL: ${{ secrets.MEND_URL }}
+        MEND_LOG_LEVEL: "DEBUG"
