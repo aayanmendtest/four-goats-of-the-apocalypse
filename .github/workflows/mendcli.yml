@@ -45,14 +45,14 @@ jobs:
 
     - name: Print dummy log file
       run: |
-        mkdir -p "~/.mend/logs/sca" && touch "~/.mend/logs/sca/testsca.log"
-        echo "Current Mend CLI version: $(mend version)" >> {HOME}/.mend/logs/sca/testsca.log
+        mkdir -p "${HOME}/.mend/logs/sca" && touch "${HOME}/.mend/logs/sca/testsca.log"
+        echo "Current Mend CLI version: $(mend version)" >> "${HOME}/.mend/logs/sca/testsca.log"
   
     - name: Find the newest Mend CLI SCA log file
       run: |
-        ls -t ~/.mend/logs/
-        ls -t ~/.mend/logs/sca/
-        latest_file=$(ls -t ~/.mend/logs/sca/*.log | head -n 1)
+        ls -t ${HOME}/.mend/logs/
+        ls -t ${HOME}/.mend/logs/sca/
+        latest_file=$(ls -t ${HOME}/.mend/logs/sca/*.log | head -n 1)
         echo "LATEST_FILE=$latest_file" >> $GITHUB_ENV
 
     - name: Upload newest Mend CLI log as artifact
