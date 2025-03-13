@@ -45,7 +45,7 @@ jobs:
 
     - name: Print dummy log file
       run: |
-        mkdir -p ${HOME}/.mend/logs/sca && touch ${HOME}/.mend/logs/sca/testsca.log
+        mkdir -p "${HOME}/.mend/logs/sca" && touch "${HOME}/.mend/logs/sca/testsca.log"
         echo "Current Mend CLI version: $(mend version)" >> {HOME}/.mend/logs/sca/testsca.log
   
     - name: Find the newest Mend CLI SCA log file
