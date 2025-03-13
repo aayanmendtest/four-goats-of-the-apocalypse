@@ -25,14 +25,14 @@ jobs:
         echo "Verifying the CLI version"
         mend version
         
-    - name: Resolve .NET dependencies
-      run: nuget install
+    # - name: Resolve .NET dependencies
+    #   run: nuget install
     - name: Resolve Maven dependencies
       run: mvn clean install
     - name: Resolve npm dependencies
       run: npm install
-    # - name: Resolve pip dependencies
-    #   run: pip install -r requirements.txt
+    - name: Resolve pip dependencies
+      run: pip install -r requirements.txt
 
     - name: Run Mend CLI
       run: |
