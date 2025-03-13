@@ -27,22 +27,27 @@ jobs:
         
     # - name: Resolve .NET dependencies
     #   run: nuget install
-    - name: Resolve Maven dependencies
-      run: mvn clean install
-    - name: Resolve npm dependencies
-      run: npm install
-    - name: Resolve pip dependencies
-      run: pip install -r requirements.txt
+    # - name: Resolve Maven dependencies
+    #   run: mvn clean install
+    # - name: Resolve npm dependencies
+    #   run: npm install
+    # - name: Resolve pip dependencies
+    #   run: pip install -r requirements.txt
 
-    - name: Run Mend CLI
+    # - name: Run Mend CLI
+    #   run: |
+    #     mend dep --update --scope "Aayans Sandbox//SCA_CLI//${{ github.event.repository.name }}" --non-interactive
+    #   env:
+    #     MEND_USER_KEY: ${{ secrets.WS_USERKEY }}
+    #     MEND_EMAIL: ${{ secrets.MEND_EMAIL }}
+    #     MEND_URL: ${{ secrets.MEND_URL }}
+    #     MEND_LOG_LEVEL: "DEBUG"
+
+    - name: Print dummy log file
       run: |
-        mend dep --update --scope "Aayans Sandbox//SCA_CLI//${{ github.event.repository.name }}" --non-interactive
-      env:
-        MEND_USER_KEY: ${{ secrets.WS_USERKEY }}
-        MEND_EMAIL: ${{ secrets.MEND_EMAIL }}
-        MEND_URL: ${{ secrets.MEND_URL }}
-        MEND_LOG_LEVEL: "DEBUG"
-
+        mkdir -p ${HOME}/.mend/logs/sca && touch ${HOME}/.mend/logs/sca/testsca.log
+        echo "Current Mend CLI version: $(mend version)" >> {HOME}/.mend/logs/sca/testsca.log
+  
     - name: Find the newest Mend CLI SCA log file
       run: |
         ls -t ${HOME}/.mend/logs/
