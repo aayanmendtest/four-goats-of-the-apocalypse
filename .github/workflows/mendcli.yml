@@ -43,19 +43,13 @@ jobs:
         MEND_URL: ${{ secrets.MEND_URL }}
         MEND_LOG_LEVEL: "DEBUG"
 
-  upload-latest-log:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+    - name: Find the newest Mend CLI SCA log file
+      run: |
+        latest_file=$(ls -t ${HOME}/.mend/logs/sca/*.log | head -n 1)
+        echo "LATEST_FILE=$latest_file" >> $GITHUB_ENV
 
-      - name: Find the newest log file
-        run: |
-          latest_file=$(ls -t ${HOME}/.mend/logs/sca *.log | head -n 1)
-          echo "LATEST_FILE=$latest_file" >> $GITHUB_ENV
-
-      - name: Upload newest log as artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: latest-log
-          path: ${{ env.LATEST_FILE }}
+    - name: Upload newest Mend CLI log as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: mend-cli-log
+        path: ${{ env.LATEST_FILE }}
