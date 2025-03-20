@@ -63,4 +63,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: mend-cli-log
-        path: $HOME/.mend/logs/sca/
+        path: ${{ env.HOME }}/.mend/logs/sca/
