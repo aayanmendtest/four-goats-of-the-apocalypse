@@ -50,6 +50,7 @@ jobs:
         echo "Current Mend CLI version: $(mend version)" >> "${HOME}/.mend/logs/sca/testsca1.log"
         echo "Current Mend CLI version: $(mend version)" >> "${HOME}/.mend/logs/sca/testsca2.log"
         echo "Current Mend CLI version: $(mend version)" >> "${HOME}/.mend/logs/sca/testsca3.log"
+        ls -R "${HOME}/.mend/logs/sca/"
   
     # - name: Find the newest Mend CLI SCA log file
     #   run: |
